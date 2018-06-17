@@ -1,0 +1,42 @@
+{
+  "name": "PollOption",
+  "plural": "PollOptions",
+  "base": "GenericModel",
+  "indexes": {},
+  "options": {},
+  "hidden": ["createdAt", "updatedAt"],
+  "mixins": {
+    "ReadOnly": {}
+  },
+  "properties": {
+    "content": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "poll": {
+      "type": "belongsTo",
+      "model": "Poll",
+      "foreignKey": "pollId"
+    },
+    "votes": {
+      "type": "hasMany",
+      "model": "Vote",
+      "foreignKey": "pollOptionId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ],
+  "methods": {}
+}
