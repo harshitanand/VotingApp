@@ -27,10 +27,6 @@
     "dataSource": "postgreDS",
     "public": true
   },
-  "Message": {
-    "dataSource": "postgreDS",
-    "public": true
-  },
   "Poll": {
     "dataSource": "postgreDS",
     "public": true
