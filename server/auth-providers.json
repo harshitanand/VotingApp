@@ -1,0 +1,16 @@
+{
+  "baseUrl": "http://loalhost:3000",
+  "twitter-login": {
+    "provider": "twitter",
+    "authScheme": "oauth",
+    "module": "passport-twitter",
+    "login-redirect": "/social",
+    "callbackURL": "/auth/twitter/callback",
+    "authPath": "/auth/twitter",
+    "callbackPath": "/auth/twitter/callback",
+    "successRedirect": "/auth/account",
+    "consumerKey": "QM8gDgte0qJBw2AwIUJjtpKVD",
+    "consumerSecret": "ehMpd7YIdFCDDJ1NDK3X4g0bAZxT2JgPRBl87a0L9cZ5JEYm1Q",
+    "failureFlash": true
+  }
+}

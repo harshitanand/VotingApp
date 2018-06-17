@@ -1,0 +1,22 @@
+{
+  "postgreDS": {
+    "host": "postgresql",
+    "port": 5432,
+    "database": "votingapp",
+    "username": "root",
+    "password": "postgre",
+    "name": "postgreDS",
+    "connector": "postgresql",
+    "debug": true
+  },
+  "postgreDSReadOnly": {
+    "host": "postgresql",
+    "port": 5432,
+    "database": "votingapp",
+    "username": "readonly_user",
+    "password": "postgre",
+    "name": "postgreDSReadOnly",
+    "connector": "postgresql",
+    "debug": true
+  }
+}
