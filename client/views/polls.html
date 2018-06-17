@@ -1,0 +1,21 @@
+<div class="container-fluid" ng-if="allPolls.length > 0">
+  <div class="row">
+    <div class="col-lg-4 text-center" ng-repeat="poll in allPolls">
+      <h1>{{poll.primaryContent}}</h1>
+      <p>{{poll.description}}.</p>
+      <p>
+        <a class="btn btn-primary btn-lg" ng-href="/polls/{{poll.id}}">Vote</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron" ng-if="allPolls.length === 0">
+  <div class="container text-center">
+    <h3>Add New Polls</h3>
+    <p>You have no active polls of yours add new see stats</p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+  </div>
+</div>

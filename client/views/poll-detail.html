@@ -1,0 +1,97 @@
+<div class="col-lg-12">
+  <div ng-if="!showEditPoll" class="col-lg-6">
+    <form class="form-horizontal">
+      <legend>
+        <h2>{{ poll.primaryContent }}</h1>
+          <br>
+          <button type="submit" class="btn btn-danger pull-right" ng-if="editPoll" ng-click="deletePoll()"> Delete Poll</button>
+          <button type="submit" class="btn btn-info pull-right" ng-if="editPoll" ng-click="showEditBlock()"> Edit Poll</button>
+          <br> {{poll.description}}
+      </legend>
+      <br>
+      <br>
+      <fieldset>
+        <div class="form-group form-group-lg">
+          <label class="col-lg-2 control-label"> Select an Option</label>
+          <div class="col-lg-8">
+            <div class="radio" ng-repeat="option in poll.pollOptions">
+              <label>
+                <input type="radio" class="form-control form-group-lg" name="optionsRadios" ng-model="$parent.selectedOption" ng-value="option"
+                  ng-change="changeOption($index)">
+                <p style="font-size:30px;margin-left:10px;margin-top:8px;"> {{option.content}} ({{option.description}})</p>
+              </label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="col-lg-12 form-group form-group-lg">
+          <label class="col-lg-2 control-label"></label>
+          <div class="col-lg-10">
+            <fieldset>
+              <div class="col-lg-8" ng-if="newOptionBlock">
+                <input type="text" class="form-control" ng-model="newOption.content" required>
+              </div>
+              <div class="col-lg-2" ng-if="newOptionBlock" style="margin-left:50px;">
+                <button class="btn btn-success btn-lg pull-right" ng-click="addNewOption()">Add</button>
+              </div>
+              <div class="col-lg-2 pull-right" ng-if="!newOptionBlock" style="margin-left:50px;">
+                <button class="btn btn-success btn-lg pull-right" ng-click="openNewOptionBlock()">Create New</button>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <a href="#" socialshare socialshare-provider="twitter" socialshare-text="poll.content" socialshare-hashtags="angularjs, angular-socialshare"
+          socialshare-url="http://720kb.net">
+          Share me
+        </a>
+        <br>
+        <br>
+        <div class="form-group form-group-lg" style="margin-top:150px;">
+          <div class="col-lg-10">
+            <button type="reset" class="btn btn-danger btn-lg pull-left col-lg-offset-2">
+              <a href="/polls">Cancel</a>
+            </button>
+            <button type="submit" class="btn btn-success btn-lg pull-right" ng-if="userVote !== null" ng-click="submitVote()">Update Vote</button>
+            <button type="submit" class="btn btn-success btn-lg pull-right" ng-if="userVote === null" ng-click="submitVote()">Submit Vote</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div ng-if="showEditPoll" class="col-lg-6">
+    <form class="form-horizontal">
+      <legend>
+        Edit Poll
+      </legend>
+      <fieldset>
+        <div class="form-group form-group-lg">
+          <label class="col-lg-2 control-label">Primary Content</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" ng-model="poll.primaryContent" placeholder="Content" required>
+          </div>
+        </div>
+        <div class="form-group form-group-lg">
+          <label class="col-lg-2 control-label">Description (Optional)</label>
+          <div class="col-lg-10">
+            <textarea class="form-control" ng-model="poll.description" rows="3"></textarea>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+          <div class="col-lg-10">
+            <button type="reset" class="btn btn-danger btn-lg col-lg-offset-3 pull-left" ng-if="showEditPoll" ng-click="showPollBlock()">Cancel
+            </button>
+            <button class="btn btn-success btn-lg pull-right" ng-click="savePoll()">Modify Poll</button>
+          </div>
+      </fieldset>
+    </form>
+    </div>
+
+    <div class="col-lg-6">
+      <canvas id="myChart" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels">
+      </canvas>
+    </div>
+  </div>
