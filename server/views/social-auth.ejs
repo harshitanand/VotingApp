@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Voting APP Social Auth</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+  function closeWindow(window, err, info, loginType) {
+    console.log('hu mn')
+    console.log(arguments)
+    if (window.opener) {
+      window.opener.focus();
+      if (window.opener.loginCallback) {
+        window.opener.loginCallback(err, info);
+      }
+      setTimeout(function () {
+        window.close()
+      }, 0);
+    } else {
+      window.location = "/";
+    }
+  }
+
+  function socialAuth() {
+    var key;
+    var err = getParameterByName('err')
+    var identityToken = getParameterByName('identityToken')
+    var fullName = getParameterByName('fullName')
+    var email = getParameterByName('email')
+    var provider = getParameterByName('provider')
+    var accessToken = getParameterByName('accessToken')
+    var mobileNumber = getParameterByName('mobileNumber')
+    var userId = getParameterByName('userId')
+    var admin = getParameterByName('admin')
+
+    if (err) {
+      return closeWindow(window, err);
+    } else {
+      closeWindow(
+        window,
+        undefined, {
+          identityToken: identityToken,
+          fullName: fullName,
+          email: email,
+          provider: provider,
+          accessToken: accessToken,
+          mobileNumber: mobileNumber,
+          userId: userId,
+          admin: admin
+        },
+        localStorage.loginSection
+      );
+    }
+  }
+
+  function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    var results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  // execution starts here.
+  socialAuth();
+
+</script>
+
+</html>
