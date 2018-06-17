@@ -1,0 +1,77 @@
+{
+  "name": "Poll",
+  "plural": "Polls",
+  "base": "GenericModel",
+  "indexes": {},
+  "options": {},
+  "hidden": ["createdAt", "updatedAt"],
+  "mixins": {
+    "ReadOnly": {}
+  },
+  "properties": {
+    "primaryContent": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pollOptions": {
+      "type": "hasMany",
+      "model": "PollOption",
+      "foreignKey": "pollId"
+    },
+    "tags": {
+      "type": "hasMany",
+      "model": "PollTag",
+      "foreignKey": "pollId"
+    },
+    "votes": {
+      "type": "hasMany",
+      "model": "Vote",
+      "foreignKey": "pollId"
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["create", "getPollFullData", "createNewPoll"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": ["update", "destroyAll", "destroyById", "deleteAll", "deleteById"]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": ["find", "getAllPolls"]
+    }
+  ],
+  "methods": {}
+}
