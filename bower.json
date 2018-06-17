@@ -1,0 +1,72 @@
+{
+  "name": "voting-app",
+  "description": "Application count votes on polls",
+  "main": "server/server.js",
+  "authors": [
+    "Harshit Anand <harshitanand94@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.9",
+    "angular-sanitize": "1.4.9",
+    "angular-resource": "1.4.9",
+    "angular-aria": "1.4.9",
+    "angular-messages": "1.4.9",
+    "jquery": "2.1.4",
+    "owl.carousel": "2.0.0-beta.3",
+    "ui.bootstrap": "0.13.4",
+    "ngToast": "ngtoast#1.5.6",
+    "ngstorage": "0.3.10",
+    "angular-ui-router": "0.2.15",
+    "bootstrap-sass-official": "3.3.6",
+    "angular-block-ui": "0.2.2",
+    "angular-bootstrap": "0.14.3",
+    "angular-moment": "0.10.3",
+    "moment": "2.10.6",
+    "angular-bootstrap-datetimepicker": "git://github.com/dalelotts/angular-bootstrap-datetimepicker#0.4.0",
+    "angular-smart-table": "2.1.6",
+    "angular-animate": "1.4.9",
+    "ng-file-upload": "12.0.1",
+    "angular-ui-sortable": "0.13.4",
+    "angular-material": "1.0.5",
+    "raven-js": "3.16.0",
+    "angularjs-dropdown-multiselect": "^1.5.2",
+    "file-saver": "1.3.2",
+    "underscore": "1.8.3",
+    "number-to-words": "1.2.3",
+    "compass-mixins": "^1.0.2",
+    "compass-sass-mixins": "*",
+    "textAngular": "1.5.16",
+    "chart.js": "^2.6.0",
+    "angular-chart.js": "^1.1.1",
+    "angular-socialshare": "angularjs-socialshare#^2.3.11"
+  },
+  "resolutions": {
+    "angular": "1.4.9"
+  },
+  "overrides": {
+    "angular-bootstrap-datetimepicker": {
+      "main": [
+        "src/js/datetimepicker.js",
+        "src/css/datetimepicker.css"
+      ]
+    },
+    "ngToast": {
+      "main": [
+        "dist/ngToast.js",
+        "dist/ngToast.css",
+        "dist/ngToast-animations.css"
+      ]
+    }
+  }
+}

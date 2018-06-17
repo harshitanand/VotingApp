@@ -1,0 +1,56 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "env": {
+    "node": true
+  },
+
+  "plugins": ["import"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "script",
+    "ecmaFeatures": {
+      "modules": false
+    }
+  },
+  "rules": {
+    "no-unexpected-multiline": "off",
+    "no-else-return": "off",
+    "no-restricted-syntax": "off",
+    "max-len": "off",
+    "func-names": "off",
+    "import/no-dynamic-require": "off",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "camelcase": [
+      "error",
+      {
+        "properties": "never"
+      }
+    ],
+    "no-underscore-dangle": ["off"],
+    "strict": [2, "global"],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ]
+  },
+  "globals": {
+    "accessToken": true,
+    "AccessToken": true,
+    "Poll": true,
+    "AppUser": true,
+    "Vote": true
+  }
+}
