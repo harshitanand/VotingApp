@@ -1,0 +1,55 @@
+{
+  "name": "userIdentity",
+  "plural": "userIdentities",
+  "base": "UserIdentity",
+  "indexes": {
+    "user_id_idx_on_user_identity": {
+      "keys": {
+        "userId": 1
+      }
+    },
+    "provider_idx_on_user_identity": {
+      "keys": {
+        "provider": 1
+      }
+    },
+    "email_idx_on_user_identity": {
+      "keys": {
+        "email": 1
+      }
+    },
+    "token_idx_on_user_identity": {
+      "keys": {
+        "token": 1
+      },
+      "options": {
+        "token": true
+      }
+    }
+  },
+  "hidden": [
+    "token",
+    "credentials",
+    "created",
+    "modified"
+  ],
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string",
+      "defaultFn": "uuidv4"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
