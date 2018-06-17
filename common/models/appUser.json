@@ -1,0 +1,83 @@
+{
+  "name": "AppUser",
+  "plural": "AppUsers",
+  "base": "User",
+  "indexes": {
+    "email_idx_on_app_user": {
+      "keys": {
+        "email": 1
+      }
+    },
+    "full_name_idx_on_app_user": {
+      "keys": {
+        "fullName": 1
+      }
+    },
+    "mobile_number_idx_on_app_user": {
+      "keys": {
+        "mobileNumber": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "caseSensitiveEmail": true,
+    "rmCaseSensitiveEmail": false
+  },
+  "hidden": ["createdAt", "updatedAt"],
+  "mixins": {
+    "ReadOnly": {}
+  },
+  "properties": {
+    "fullName": {
+      "type": "string"
+    },
+    "mobileNumber": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "identities": {
+      "type": "hasMany",
+      "model": "userIdentity",
+      "foreignKey": "userId"
+    },
+    "credentials": {
+      "type": "hasMany",
+      "model": "userCredential",
+      "foreignKey": "userId"
+    },
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "accessToken",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "System",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "accessTokenLogin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    }
+  ],
+  "methods": {}
+}
