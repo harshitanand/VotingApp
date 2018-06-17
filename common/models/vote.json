@@ -1,0 +1,54 @@
+{
+  "name": "Vote",
+  "plural": "Votes",
+  "base": "GenericModel",
+  "indexes": {},
+  "options": {},
+  "hidden": ["createdAt", "updatedAt"],
+  "mixins": {
+    "ReadOnly": {}
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "pollOption": {
+      "type": "belongsTo",
+      "model": "PollOption",
+      "foreignKey": "pollOptionId"
+    },
+    "poll": {
+      "type": "belongsTo",
+      "model": "Poll",
+      "foreignKey": "pollId"
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "System",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["create", "findOne", "find", "put", "updateOrCreate"]
+    }
+  ],
+  "methods": {}
+}
