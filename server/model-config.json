@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "sources": ["loopback/common/models", "loopback/server/models", "../common/models", "./models"],
+    "mixins": ["loopback/common/mixins", "loopback/server/mixins", "../common/mixins", "./mixins"]
+  },
+  "User": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": null,
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "postgreDS",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "postgreDS",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "AppUser": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "Message": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "Poll": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "PollOption": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "Vote": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "accessToken": {
+    "dataSource": "postgreDS",
+    "public": false
+  },
+  "userIdentity": {
+    "dataSource": "postgreDS",
+    "public": true
+  },
+  "userCredential": {
+    "dataSource": "postgreDS",
+    "public": false
+  }
+}
