@@ -1,12 +1,15 @@
 <div class="container-fluid" ng-if="allPolls.length > 0">
   <div class="row">
-    <div class="col-lg-4 text-center" ng-repeat="poll in allPolls">
-      <h1>{{poll.primaryContent}}</h1>
-      <p>{{poll.description}}.</p>
-      <p>
-        <a class="btn btn-primary btn-lg" ng-href="/polls/{{poll.id}}">Vote</a>
-      </p>
-    </div>
+    <a ng-repeat="poll in allPolls" ng-href="/polls/{{poll.id}}">
+      <div class="col-lg-4 text-center">
+        <h3>{{poll.primaryContent}}</h3>
+        <div style="margin-top:8%;">
+          <canvas id="myChart" ng-if="!chartEmpty" class="chart chart-doughnut" chart-data="poll.chartData" chart-labels="poll.chartLabels">
+          </canvas>
+        </div>
+
+      </div>
+    </a>
   </div>
 </div>
 
@@ -15,7 +18,7 @@
     <h3>Add New Polls</h3>
     <p>You have no active polls of yours add new see stats</p>
     <p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      <a class="btn btn-primary btn-lg" href="/newpoll" role="button">Create Poll</a>
     </p>
   </div>
 </div>
