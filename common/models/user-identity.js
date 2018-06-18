@@ -59,6 +59,7 @@ module.exports = function(UserIdentity) {
       created: date,
       modified: date,
     });
-    return { identity: _identity, user: user, accessToken: null };
+    const accessToken = await user.createAccessToken(AppUser.getUserTTL(user));
+    return { identity: _identity, user: user, accessToken: accessToken };
   };
 };

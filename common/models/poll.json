@@ -56,7 +56,7 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": ["create", "getPollFullData", "createNewPoll"]
+      "property": ["create", "getPollFullData", "createNewPoll", "getActiveUserPolls"]
     },
     {
       "accessType": "EXECUTE",

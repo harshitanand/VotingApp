@@ -49,6 +49,32 @@ module.exports = Poll => {
     return polls;
   };
 
+  Poll.getActiveUserPolls = async req => {
+    const optionsInclusion = {
+      relation: 'pollOptions',
+      scope: {
+        fields: ['id', 'content', 'description'],
+      },
+    };
+
+    const querySet = {
+      where: { userId: req.currentUser, active: true },
+      include: [optionsInclusion],
+    };
+
+    let polls = await Poll.find(querySet);
+    polls = polls.map(poll => poll.toJSON());
+
+    await Promise.map(polls, async poll => {
+      await Promise.map(poll.pollOptions, async opt => {
+        const count = await Vote.count({ pollOptionId: opt.id, pollId: poll.id });
+        opt.votes = count;
+        return opt;
+      });
+    });
+    return polls;
+  };
+
   Poll.getPollFullData = async pollId => {
     const userInclusion = {
       relation: 'author',
@@ -125,6 +151,18 @@ module.exports = Poll => {
     },
     http: {
       path: '/getPollFullData',
+      verb: 'get',
+    },
+  });
+
+  Poll.remoteMethod('getActiveUserPolls', {
+    accepts: [],
+    returns: {
+      root: true,
+      type: 'array',
+    },
+    http: {
+      path: '/getActiveUserPolls',
       verb: 'get',
     },
   });
