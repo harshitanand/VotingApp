@@ -35,6 +35,7 @@
         Poll.createNewPoll({ data: $scope.poll })
           .$promise.then(function(data) {
             $scope.poll = data;
+            $state.go('userPolls');
           })
           .catch(function(err) {
             $state.go('userPolls');

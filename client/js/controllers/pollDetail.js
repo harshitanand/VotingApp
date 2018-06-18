@@ -40,37 +40,22 @@
       $scope.availableOptions = [];
       $scope.newOptionBlock = false;
       $scope.newOption = { content: '', pollId: $stateParams.pollId };
+      $scope.shareUrl = 'http://' + $window.location.host + '/polls/' + $stateParams.pollId;
 
       var getUserVote = function() {
         Vote.findOne({
           filter: { where: { userId: $scope.currentUser.id, pollId: $stateParams.pollId }, include: ['pollOption'] },
-        }).$promise.then(function(data) {
-          $scope.userVote = data;
-          $scope.selectedOption = $scope.userVote.pollOption;
-        });
+        })
+          .$promise.then(function(data) {
+            $scope.userVote = data;
+            $scope.selectedOption = $scope.userVote.pollOption;
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       };
 
-      function generateColors(howmany) {
-        var result = [];
-        var randomstart = Math.floor(Math.random() * 360);
-        for (var i = 1; i <= howmany; i++) {
-          result.push('#' + ((Math.random() * 0xffffff) << 0).toString(16));
-        }
-        console.log(result);
-        return result;
-      }
-
       var chartInit = function() {
-        $scope.chartOptions = {
-          global: {
-            colors: generateColors($scope.availableOptions.length),
-          },
-        };
-        $scope.datasets = [
-          {
-            backgroundColor: generateColors($scope.availableOptions.length),
-          },
-        ];
         $scope.chartLabels = $scope.availableOptions.map(function(opt) {
           return opt.content;
         });
@@ -94,6 +79,7 @@
             }
           })
           .catch(function(err) {
+            console.log(err);
             $state.go('home');
           });
       };
@@ -108,20 +94,26 @@
 
       $scope.submitVote = function() {
         if (!$scope.userVote) {
-          Vote.create({ pollId: $stateParams.pollId, pollOptionId: $scope.selectedOption.id }).$promise.then(function(
-            data
-          ) {
-            console.log(data);
-            $scope.userVote = data;
-            $window.location.reload();
-          });
+          Vote.create({ pollId: $stateParams.pollId, pollOptionId: $scope.selectedOption.id })
+            .$promise.then(function(data) {
+              console.log(data);
+              $scope.userVote = data;
+              $window.location.reload();
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         } else {
           $scope.userVote.pollOptionId = $scope.selectedOption.id;
-          Vote.prototype$updateAttributes({}, $scope.userVote).$promise.then(function(data) {
-            console.log(data);
-            $scope.userVote = data;
-            $window.location.reload();
-          });
+          Vote.prototype$updateAttributes({}, $scope.userVote)
+            .$promise.then(function(data) {
+              console.log(data);
+              $scope.userVote = data;
+              $window.location.reload();
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         }
       };
 
@@ -133,23 +125,32 @@
             $window.location.reload();
           })
           .catch(function(err) {
+            console.log(err);
             $window.location.reload();
           });
       };
 
       $scope.deletePoll = function() {
-        Poll.prototype$updateAttributes($scope.poll, { active: false }).$promise.then(function(data) {
-          console.log(data);
-          $scope.userVote = data;
-          $window.location.reload('/polls');
-        });
+        Poll.prototype$updateAttributes($scope.poll, { active: false })
+          .$promise.then(function(data) {
+            console.log(data);
+            $scope.userVote = data;
+            $window.location.reload('/polls');
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       };
 
       $scope.savePoll = function() {
-        Poll.prototype$updateAttributes({}, $scope.poll).$promise.then(function(data) {
-          $scope.poll = data;
-          $window.location.reload('/polls/' + $stateParams.pollId);
-        });
+        Poll.prototype$updateAttributes({}, $scope.poll)
+          .$promise.then(function(data) {
+            $scope.poll = data;
+            $window.location.reload();
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       };
 
       getPoll();

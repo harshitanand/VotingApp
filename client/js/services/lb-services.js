@@ -4178,12 +4178,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use PollOption.author() instead.
-            "::get::PollOption::author": {
-              url: urlBase + "/PollOptions/:id/author",
-              method: "GET",
-            },
-
             // INTERNAL. Use Vote.author() instead.
             "::get::Vote::author": {
               url: urlBase + "/Votes/:id/author",
@@ -5125,87 +5119,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::updateById::AppUser::identities"];
           return action.apply(R, arguments);
         };
-
-
-        return R;
-      }]);
-
-/**
- * @ngdoc object
- * @name lbServices.Message
- * @header lbServices.Message
- * @object
- *
- * @description
- *
- * A $resource object for interacting with the `Message` model.
- *
- * ## Example
- *
- * See
- * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
- * for an example of using this object.
- *
- */
-  module.factory(
-    "Message",
-    [
-      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
-      function(LoopBackResource, LoopBackAuth, $injector, $q) {
-        var R = LoopBackResource(
-        urlBase + "/Messages/:id",
-          { 'id': '@id' },
-          {
-
-            /**
-             * @ngdoc method
-             * @name lbServices.Message#greet
-             * @methodOf lbServices.Message
-             *
-             * @description
-             *
-             * <em>
-             * (The remote method definition does not provide any description.)
-             * </em>
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `msg` – `{string=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `greeting` – `{string=}` -
-             */
-            "greet": {
-              url: urlBase + "/Messages/greet",
-              method: "GET",
-            },
-          }
-        );
-
-
-
-
-        /**
-        * @ngdoc property
-        * @name lbServices.Message#modelName
-        * @propertyOf lbServices.Message
-        * @description
-        * The name of the model represented by this $resource,
-        * i.e. `Message`.
-        */
-        R.modelName = "Message";
-
 
 
         return R;
@@ -6826,6 +6739,43 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Poll#getActiveUserPolls
+             * @methodOf lbServices.Poll
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Poll` object.)
+             * </em>
+             */
+            "getActiveUserPolls": {
+              isArray: true,
+              url: urlBase + "/Polls/getActiveUserPolls",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
              * @name lbServices.Poll#getAllPolls
              * @methodOf lbServices.Poll
              *
@@ -7836,12 +7786,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use PollOption.author() instead.
-            "prototype$__get__author": {
-              url: urlBase + "/PollOptions/:id/author",
-              method: "GET",
-            },
-
             // INTERNAL. Use PollOption.votes.findById() instead.
             "prototype$__findById__votes": {
               params: {
@@ -8771,42 +8715,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.poll = function() {
           var TargetResource = $injector.get("Poll");
           var action = TargetResource["::get::PollOption::poll"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.PollOption#author
-             * @methodOf lbServices.PollOption
-             *
-             * @description
-             *
-             * Fetches belongsTo relation author.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - PollOption id
-             *
-             *  - `refresh` – `{boolean=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `AppUser` object.)
-             * </em>
-             */
-        R.author = function() {
-          var TargetResource = $injector.get("AppUser");
-          var action = TargetResource["::get::PollOption::author"];
           return action.apply(R, arguments);
         };
     /**

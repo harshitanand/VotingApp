@@ -8,7 +8,7 @@
     'LoopBackAuth',
     'ngToast',
     function(AppUser, $q, $rootScope, $localStorage, LoopBackAuth, ngToast) {
-      function login(mobileNumber, password) {
+      function login(email, password) {
         return AppUser.rmlogin({ include: 'user' }, { mobileNumber: mobileNumber, password: password.toString() })
           .$promise.then(function(response) {
             LoopBackAuth.setUser(response.id, response.userId, response.user);
@@ -31,18 +31,11 @@
         });
       }
 
-      function register(email, password, mobileNumber, fullName) {
+      function register(email, password, fullName) {
         return AppUser.rmSignup({
           email: email,
           password: password.toString(),
-          mobileNumber: mobileNumber,
           fullName: fullName,
-        }).$promise;
-      }
-
-      function forgotPassword(email) {
-        return AppUser.resetPassword({
-          email: email,
         }).$promise;
       }
 
@@ -71,7 +64,6 @@
         login: login,
         logout: logout,
         register: register,
-        forgotPassword: forgotPassword,
         isAuthorized: isAuthorized,
       };
     },

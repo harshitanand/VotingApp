@@ -86,7 +86,7 @@ function loginCallback(errorMessage, userInfo) {
 
         var home = {
           name: 'home',
-          url: '/hello',
+          url: '/',
           templateUrl: 'views/home.html',
           controller: 'HomeCtrl',
           data: {
@@ -126,7 +126,7 @@ function loginCallback(errorMessage, userInfo) {
 
         var newPoll = {
           name: 'newPoll',
-          url: '/newPoll',
+          url: '/newpoll',
           templateUrl: 'views/new-poll.html',
           controller: 'NewPollCtrl',
           data: {
@@ -140,12 +140,42 @@ function loginCallback(errorMessage, userInfo) {
         $stateProvider.state(polls);
         $stateProvider.state(pollDetail);
 
-        $stateProvider.state('login', {
-          url: '/login',
-          templateUrl: 'views/twitter-login.html',
-          controller: 'AuthLoginCtrl',
+        $stateProvider.state('/logout', {
+          url: '/logout',
           data: {
             authorizedRoles: [USER_ROLES.all],
+          },
+          resolve: {
+            logout: [
+              '$q',
+              '$location',
+              'AuthService',
+              '$localStorage',
+              'LoopBackAuth',
+              '$timeout',
+              function($q, $location, AuthService, $localStorage, LoopBackAuth, $timeout) {
+                var deferred = $q.defer();
+                AuthService.logout().then(
+                  function(result) {
+                    $location.path('/polls');
+                    delete $localStorage.user;
+                    LoopBackAuth.clearUser();
+                    LoopBackAuth.clearStorage();
+                    deferred.resolve(result);
+                  },
+                  function(error) {
+                    delete $localStorage.user;
+                    LoopBackAuth.clearUser();
+                    LoopBackAuth.clearStorage();
+                    $timeout(function() {
+                      $location.path('/');
+                    }, 0);
+                    deferred.reject(error);
+                  }
+                );
+                return deferred.promise;
+              },
+            ],
           },
         });
       },
@@ -160,6 +190,7 @@ function loginCallback(errorMessage, userInfo) {
       'AppUser',
       'LoopBackAuth',
       function($rootScope, $location, AuthService, $window, $localStorage, $state, AppUser, LoopBackAuth) {
+        console.log(LoopBackAuth.accessTokenId);
         if (LoopBackAuth.accessTokenId) {
           AppUser.accessTokenLogin({ accessTokenID: LoopBackAuth.accessTokenId })
             .$promise.then(function(response) {
@@ -183,7 +214,6 @@ function loginCallback(errorMessage, userInfo) {
           } else {
             delete $localStorage.user;
           }
-          console.log(AuthService.isAuthorized(authorizedRoles));
           if (!AuthService.isAuthorized(authorizedRoles)) {
             $state.go('login');
           } else if (AuthService.isAuthorized(authorizedRoles)) {
