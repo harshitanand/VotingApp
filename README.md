@@ -116,7 +116,7 @@ This package contains:
 | Angular v1.x | StrongLoop/Loopback |
 | AngularCharts | postrgeSql Database |
 | Angular SocialShare | PassportJs |
-| Charts.js | Firebase Test Lab |
+| Charts.js |  |
 | HTML5/CSS |  |
 
 | Both | 
