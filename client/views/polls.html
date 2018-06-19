@@ -1,13 +1,20 @@
-<div class="container-fluid" ng-if="allPolls.length > 0">
+<div class="container-fluid" ng-if="allPolls.length > 0" style="margin-bottom:50px">
   <div class="row">
     <a ng-repeat="poll in allPolls" ng-href="/polls/{{poll.id}}">
-      <div class="col-lg-4 text-center">
+      <div class="col-lg-4 text-center" style="border-style:solid;border-color:black;margin-top:25px;border-width:thin;">
         <h3>{{poll.primaryContent}}</h3>
-        <div style="margin-top:8%;">
-          <canvas id="myChart" ng-if="!chartEmpty" class="chart chart-doughnut" chart-data="poll.chartData" chart-labels="poll.chartLabels">
+        <div ng-if="!poll.chartEmpty" style="margin-top:8%;">
+          <canvas id="myChart" class="chart chart-base" chart-type="poll.chartType" chart-data="poll.chartData" chart-labels="poll.chartLabels"
+            chart-dataset-override="poll.colors" chart-options="poll.chartOptions">
           </canvas>
         </div>
-
+        <div ng-if="poll.chartEmpty" style="color:dimgray">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8" style="height:200px;margin-top:18%;">
+            <h4>No votes casted yet, Be the first one to cat your vote.</h4>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
       </div>
     </a>
   </div>

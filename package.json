@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
+    "console": "loopback-console",
     "posttest": "npm run lint && nsp check"
   },
   "lint-staged": {

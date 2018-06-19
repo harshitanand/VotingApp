@@ -54,5 +54,16 @@ boot(app, __dirname, function(err) {
   // /* eslint-enable global-require */
 
   // start the server if `$ node server.js`
-  if (require.main === module) app.start();
+  if (loopbackConsole.activated()) {
+    loopbackConsole.start(
+      app,
+      // loopback-console config
+      {
+        prompt: 'VOTINGAPP# ',
+        ignoreUndefined: false,
+      }
+    );
+  } else if (require.main === module) {
+    app.start();
+  }
 });

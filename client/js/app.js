@@ -49,6 +49,10 @@ function loginCallback(errorMessage, userInfo) {
         ChartJsProvider.setOptions({
           global: {
             colors: ['#ef5350', '#7e57c2', '#ec407a', '#ab47bc', '#5c6bc0', '#42a5f5', '#29b6f6'],
+            defaultFontFamily: "'Raleway', 'sans-serif'",
+            defaultFontColor: '#ffc816',
+            defaultFontStyle: 'normal',
+            defaultFontSize: 12,
           },
         });
       },
@@ -190,7 +194,6 @@ function loginCallback(errorMessage, userInfo) {
       'AppUser',
       'LoopBackAuth',
       function($rootScope, $location, AuthService, $window, $localStorage, $state, AppUser, LoopBackAuth) {
-        console.log(LoopBackAuth.accessTokenId);
         if (LoopBackAuth.accessTokenId) {
           AppUser.accessTokenLogin({ accessTokenID: LoopBackAuth.accessTokenId })
             .$promise.then(function(response) {
@@ -203,7 +206,7 @@ function loginCallback(errorMessage, userInfo) {
             .catch(function(err) {
               $rootScope.currentUser = null;
               $localStorage.user = null; //reset the current user anyway
-              $location.path('/login');
+              $location.path('/');
             });
         }
 
@@ -215,7 +218,7 @@ function loginCallback(errorMessage, userInfo) {
             delete $localStorage.user;
           }
           if (!AuthService.isAuthorized(authorizedRoles)) {
-            $state.go('login');
+            $state.go('home');
           } else if (AuthService.isAuthorized(authorizedRoles)) {
             $rootScope.currentUser = $localStorage.user || null;
             // if user is admin

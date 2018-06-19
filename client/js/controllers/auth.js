@@ -59,9 +59,8 @@
                 LoopBackAuth.setUser(userInfo.accessToken, currentUser.id, currentUser);
                 LoopBackAuth.rememberMe = true;
                 LoopBackAuth.save();
-                $rootScope.currentUser = response.user;
                 $localStorage.user = currentUser;
-                $state.go('home');
+                $state.go('polls');
               });
             } else {
               ngToast.create({
