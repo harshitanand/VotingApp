@@ -207,7 +207,7 @@
           .$promise.then(function(data) {
             console.log(data);
             $scope.userVote = data;
-            $window.location.reload('/polls');
+            $state.go('polls');
           })
           .catch(function(err) {
             console.log(err);
